@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -58,9 +59,26 @@ namespace Tictactoe
                 Console.WriteLine("The index chosen is invalid! choose a number between 1 to 9");
                 UserMove();
             }
-            else
+            else if(isSpaceFree(index))
             {
                 board[index] = userLetter;
+            }
+            else
+            {
+                UserMove();
+            }
+        }
+
+        public bool isSpaceFree(int index)
+        {
+            if(board[index]==' ')
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The index chosen is already occupied! Choose another index");
+                return false;
             }
         }
     }
