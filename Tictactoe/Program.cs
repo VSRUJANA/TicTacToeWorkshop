@@ -9,6 +9,7 @@ namespace Tictactoe
             TicTacToeGame t = new TicTacToeGame();
             t.CreateBoard();
             t.ChooseUserLetter();
+            t.ShowBoard();
         }
     }
 }
