@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Tictactoe
@@ -9,6 +10,8 @@ namespace Tictactoe
         public char[] board = new char[10];
         public static char userLetter;
         public static char computerLetter;
+        public const int HEAD= 1;
+        public const int TAIL= 0;
 
         public void CreateBoard()
         {
@@ -79,5 +82,15 @@ namespace Tictactoe
                 return false;
             }
         }
+
+        public string Toss()
+        {
+            Random random = new Random();
+            int toss = random.Next(0, 2);
+            string tossWin=(toss == HEAD) ? "User" : "Computer";
+            Console.WriteLine(tossWin + " has won the toss and will start the game");
+            return tossWin;
+        }
+
     }
 }
