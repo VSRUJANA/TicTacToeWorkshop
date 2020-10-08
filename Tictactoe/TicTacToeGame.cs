@@ -49,5 +49,19 @@ namespace Tictactoe
             }
         }
 
+        public void UserMove()
+        {
+            Console.WriteLine("\nChoose an index from 1 to 9");
+            int index = Convert.ToInt32(Console.ReadLine());
+            if (index < 1 || index > 9)
+            {
+                Console.WriteLine("The index chosen is invalid! choose a number between 1 to 9");
+                UserMove();
+            }
+            else
+            {
+                board[index] = userLetter;
+            }
+        }
     }
 }
