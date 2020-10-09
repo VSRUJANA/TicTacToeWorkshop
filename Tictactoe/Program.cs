@@ -7,10 +7,20 @@ namespace Tictactoe
         static void Main(string[] args)
         {
             TicTacToeGame t = new TicTacToeGame();
-            t.CreateBoard();
-            char userLetter = t.ChooseUserLetter();
-            string tossWin = t.Toss();
-            t.Play(tossWin);
+            do
+            {
+                t.CreateBoard();
+                char userLetter = t.ChooseUserLetter();
+                string tossWin = t.Toss();
+                t.Play(tossWin);
+                Console.WriteLine("Do you want to play again? press (y/n)");
+                char option = Console.ReadLine()[0];
+                if (option == 'y')
+                    continue;
+                else
+                    break;
+            }
+            while (true);
         }
     }
 }
