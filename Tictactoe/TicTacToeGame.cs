@@ -91,17 +91,17 @@ namespace Tictactoe
             Console.WriteLine(tossWin + " won the toss and will start the game");
             return tossWin;
         }
-
-        public bool CheckWin(char[] b,char playerLetter)
+        public bool CheckWin(char[] b, char playerLetter)
         {
             bool win = (b[1] == playerLetter && b[2] == playerLetter && b[3] == playerLetter) ||
                        (b[4] == playerLetter && b[5] == playerLetter && b[6] == playerLetter) ||
-                       (b[9] == playerLetter && b[8] == playerLetter && b[9] == playerLetter) ||
+                       (b[7] == playerLetter && b[8] == playerLetter && b[9] == playerLetter) ||
                        (b[1] == playerLetter && b[4] == playerLetter && b[7] == playerLetter) ||
                        (b[2] == playerLetter && b[5] == playerLetter && b[8] == playerLetter) ||
                        (b[3] == playerLetter && b[6] == playerLetter && b[9] == playerLetter) ||
                        (b[1] == playerLetter && b[5] == playerLetter && b[9] == playerLetter) ||
-                       (b[3] == playerLetter && b[5] == playerLetter && b[7] == playerLetter);            
+                       (b[3] == playerLetter && b[5] == playerLetter && b[7] == playerLetter);
+
             return win;
         }
         public bool CheckDraw()
@@ -114,7 +114,8 @@ namespace Tictactoe
             }
             if (temp == 9)
             {
-                if (!CheckWin(board,'X') && !CheckWin(board,'O'))
+
+                if (!CheckWin(board, 'X') && !CheckWin(board, 'O'))
                     return true;
             }
             return false;
@@ -151,7 +152,19 @@ namespace Tictactoe
                 if (isSpaceFree(copyOfBoard, i))
                 {
                     copyOfBoard[i] = computerLetter;
-                    if (CheckWin(copyOfBoard,computerLetter))
+                    if (CheckWin(copyOfBoard, computerLetter))
+                    {
+                        return i;
+                    }
+                }
+            }
+            for (int i = 1; i < 10; i++)
+            {
+                char[] copyOfBoard = getCopyOfBoard();
+                if (isSpaceFree(copyOfBoard, i))
+                {
+                    copyOfBoard[i] = userLetter;
+                    if (CheckWin(copyOfBoard, userLetter))
                     {
                         return i;
                     }
@@ -170,7 +183,7 @@ namespace Tictactoe
         }
         public void Play(string player)
         {
-            if (player == "User")
+            if (player == "You")
             {
                 do
                 {
@@ -183,9 +196,8 @@ namespace Tictactoe
                     if (Convert.ToBoolean(DisplayWinner()))
                         break;
                 }
-                while (!CheckWin(board,userLetter) && !CheckWin(board,computerLetter) && !CheckDraw());
-                //DisplayWinner();
 
+                while (!CheckWin(board, userLetter) && !CheckWin(board, computerLetter) && !CheckDraw());
             }
             else
             {
@@ -200,11 +212,9 @@ namespace Tictactoe
                     if (Convert.ToBoolean(DisplayWinner()))
                         break;
                 }
-                while (!CheckWin(board,userLetter) && !CheckWin(board,computerLetter) && !CheckDraw());
-                //DisplayWinner();
+                while (!CheckWin(board, userLetter) && !CheckWin(board, computerLetter) && !CheckDraw());
             }
         }
-       
         public int DisplayWinner()
         {
             if (CheckWin(board, userLetter))
@@ -213,11 +223,17 @@ namespace Tictactoe
                 return 1;
             }
             else if (CheckWin(board, computerLetter))
-            { 
+
+            {
                 Console.WriteLine("\nGame Over!! Computer won the game");
+                return 1;
+            }
+            else if (CheckDraw())
+            {
+                Console.WriteLine("\nGame Over!! It's a tie");
                 return 1;
             }
             return 0;
         }
-}
+    }
 }
