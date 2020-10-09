@@ -129,21 +129,41 @@ namespace Tictactoe
             {
                 board[index] = computerLetter;
             }
-            else
+            else if (board[1] == ' ' || board[3] == ' ' || board[7] == ' ' || board[9] == ' ')
             {
                 Random random = new Random();
+                int[] cornerMoves = { 1, 3, 7, 9 };
                 do
                 {
-                    int randomIndex = random.Next(1, 10);
-                    if (isSpaceFree(board, randomIndex))
+                    int i = random.Next(cornerMoves.Length);
+                    int randomIndex1 = cornerMoves[i];
+                    if (isSpaceFree(board, randomIndex1))
                     {
-                        board[randomIndex] = computerLetter;
-                        break;
+                        board[randomIndex1] = computerLetter;
+                        return;
+                    }
+                }
+                while (true);
+            }
+            else
+            {
+                int[] nonCornerMoves = { 2, 4, 5, 6, 8 };
+                do
+                {
+                    Random random = new Random();
+                    int j = random.Next(nonCornerMoves.Length);
+                    int randomIndex2 = nonCornerMoves[j];
+                    if (isSpaceFree(board, randomIndex2))
+                    {
+                        board[randomIndex2] = computerLetter;
+                        return;
                     }
                 }
                 while (true);
             }
         }
+        
+
         public int getWinningMove()
         {
             for (int i = 1; i < 10; i++)
