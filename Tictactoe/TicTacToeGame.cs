@@ -145,9 +145,13 @@ namespace Tictactoe
                 }
                 while (true);
             }
+            else if(isSpaceFree(board,5))
+            {
+                board[5] = computerLetter;
+            }
             else
             {
-                int[] nonCornerMoves = { 2, 4, 5, 6, 8 };
+                int[] nonCornerMoves = { 2, 4, 6, 8 };
                 do
                 {
                     Random random = new Random();
